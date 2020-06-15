@@ -2,28 +2,28 @@ package Lesson1;
 
 public class Main {
     public static void main(String[] args) {
-        Cat cat = new Cat("Mi-mi");
-        Human human = new Human("Petya");
-        Robot robot = new Robot("R2D2");
-
-        Running[] runnings = {
-                cat,
-                human,
-                robot
+        Participant[] participants = {
+                new Cat ("Mi-mi"),
+                new Human ("Petya"),
+                new Robot ("R2D2"),
+                new Human("Vasya")
             };
 
-        Jumping[] jumpings = {
-                cat,
-                human,
-                robot
-            };
+        Obstacle[] obstacles = {
+               new Wall(10),
+               new RunningTrack(700)
+        };
 
-        for (Running running : runnings) {
-            running.run();
+        for (Participant participant:participants) {
+            for (Obstacle obstacle:obstacles) {
+                obstacle.doIt(participant);
+                if (!participant.isInvolved()) {
+                    break;
+                }
+            }
         }
-        for (Jumping jumping : jumpings) {
-            jumping.jump();
+        for (Participant participant : participants) {
+            participant.getInfo();
         }
-
     }
 }
